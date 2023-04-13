@@ -60,14 +60,14 @@
       </ul>
       <div id="dropdown-cta" class="p-4 mt-6 rounded-lg bg-blue-50 dark:bg-blue-900" role="alert">
          <div class="flex items-center mb-3">
-            <span class="bg-orange-100 text-orange-800 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-orange-200 dark:text-orange-900">Up to 20% Discount</span>
+            <span class="bg-orange-100 text-orange-800 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-orange-200 dark:text-orange-900">Up to 5% Discount</span>
             <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-blue-50 text-blue-900 rounded-lg focus:ring-2 focus:ring-blue-400 p-1 hover:bg-blue-200 inline-flex h-6 w-6 dark:bg-blue-900 dark:text-blue-400 dark:hover:bg-blue-800" data-dismiss-target="#dropdown-cta" aria-label="Close">
                   <span class="sr-only">Close</span>
                   <svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </button>
          </div>
          <p class="mb-3 text-sm text-blue-800 dark:text-blue-400">
-         "Shop now and get up to 20% off your purchase with our exclusive discount code!"
+         "Shop now and get up to 5% off your purchase with our exclusive discount code!"
          </p>
 
       </div>
@@ -110,6 +110,7 @@
 
         </div>
         
+        
         <div class="flex items-center justify-between">
             <input type="hidden" name="product_name" value="<?php echo $product_title ?>">
             <input type="hidden" name="product_price" value="<?php echo $product_price ?>">
@@ -118,8 +119,9 @@
             <input type="hidden" name="product_rating" value="<?php echo $product_rating ?>">
             <input type="hidden" name="product_cat" value="<?php echo $category_for ?>">
             <input type="hidden" name="product_id" value="<?php echo $product_id ?>">
+            <input type="hidden" name="product_qty" value="<?php echo $product_qty ?>">
             
-            <button data-modal-target="defaultModal" data-modal-toggle="defaultModal" type="button" name="details" class="text-white bg-yellow-300 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-300 dark:hover:bg-yellow-400 dark:focus:ring-yellow-400">Details</button>
+            <a href="./details.php?product_id=<?php echo $product_id ?>" class="text-white bg-yellow-300 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-300 dark:hover:bg-yellow-400 dark:focus:ring-yellow-400">Details</a>
             <button type="submit" name="add_to_cart" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to card</button>
 
         </div>
@@ -173,8 +175,9 @@
             <input type="hidden" name="product_rating" value="<?php echo $product_rating ?>">
             <input type="hidden" name="product_cat" value="<?php echo $category_for ?>">
             <input type="hidden" name="product_id" value="<?php echo $product_id ?>">
+            <input type="hidden" name="product_qty" value="<?php echo $product_qty ?>">
             
-            <button data-modal-target="defaultModal" data-modal-toggle="defaultModal" type="button" name="details" class="text-white bg-yellow-300 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-300 dark:hover:bg-yellow-400 dark:focus:ring-yellow-400">Details</button>
+            <a href="./details.php" name="details" class="text-white bg-yellow-300 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-300 dark:hover:bg-yellow-400 dark:focus:ring-yellow-400">Details</a>
             <button type="submit" name="add_to_cart" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to card</button>
 
         </div>
@@ -228,8 +231,9 @@
             <input type="hidden" name="product_rating" value="<?php echo $product_rating ?>">
             <input type="hidden" name="product_cat" value="<?php echo $category_for ?>">
             <input type="hidden" name="product_id" value="<?php echo $product_id ?>">
+            <input type="hidden" name="product_qty" value="<?php echo $product_qty ?>">
             
-            <button data-modal-target="defaultModal" data-modal-toggle="defaultModal" type="button" name="details" class="text-white bg-yellow-300 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-300 dark:hover:bg-yellow-400 dark:focus:ring-yellow-400">Details</button>
+            <button  type="button" name="details" class="text-white bg-yellow-300 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-300 dark:hover:bg-yellow-400 dark:focus:ring-yellow-400">Details</button>
             <button type="submit" name="add_to_cart" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to card</button>
 
         </div>
@@ -284,6 +288,7 @@
             <input type="hidden" name="product_rating" value="<?php echo $product_rating ?>">
             <input type="hidden" name="product_cat" value="<?php echo $category_for ?>">
             <input type="hidden" name="product_id" value="<?php echo $product_id ?>">
+            <input type="hidden" name="product_qty" value="<?php echo $product_qty ?>">
             
             <button data-modal-target="defaultModal" data-modal-toggle="defaultModal" type="button" name="details" class="text-white bg-yellow-300 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-300 dark:hover:bg-yellow-400 dark:focus:ring-yellow-400">Details</button>
             <button type="submit" name="add_to_cart" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to card</button>
@@ -339,6 +344,7 @@
             <input type="hidden" name="product_rating" value="<?php echo $product_rating ?>">
             <input type="hidden" name="product_cat" value="<?php echo $category_for ?>">
             <input type="hidden" name="product_id" value="<?php echo $product_id ?>">
+            <input type="hidden" name="product_qty" value="<?php echo $product_qty ?>">
             
             <button data-modal-target="defaultModal" data-modal-toggle="defaultModal" type="button" name="details" class="text-white bg-yellow-300 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-300 dark:hover:bg-yellow-400 dark:focus:ring-yellow-400">Details</button>
             <button type="submit" name="add_to_cart" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to card</button>

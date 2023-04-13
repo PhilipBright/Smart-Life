@@ -41,8 +41,15 @@
 
 
 </div>
+
 <?php } ?>
+<form action="addCategory.php" method="POST">
+<div class="flex w-80 justify-center ml-32 items-center bg-white border border-gray-200 rounded-lg shadow  hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+    <button type="submit" name="add_category"><img src="../assets/plus.png" alt="" class="w-64"></button>
 </div>
+</form>
+</div>
+
 </div>
 
 <script src="https://cdn.tailwindcss.com"></script>

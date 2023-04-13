@@ -22,6 +22,7 @@ if (isset($_POST['sign_submit'])) {
     $username = $row['username'];
     $email = $row['user_email'];
     $image = $row['user_image'];
+    
 
     $_SESSION['U_username'] = $row['username'];
     $_SESSION['U_email'] = $row['user_email'];
@@ -270,15 +271,7 @@ if (isset($_POST['reg_submit'])) {
                                                                                               } else echo $_SESSION['U_email'] ?></span>
           </div>
           <ul class="py-2" aria-labelledby="user-menu-button">
-            <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
-            </li>
-            <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
-            </li>
-            <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
-            </li>
+            
 
             <!-- <li>
             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
@@ -328,7 +321,7 @@ if (isset($_POST['reg_submit'])) {
             <a href="#" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
           </li>
           <li>
-            <a href="#Service" class=" block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Service</a>
+            <a href="#" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Service</a>
           </li>
         </ul>
       </div>
@@ -350,7 +343,7 @@ if (isset($_POST['reg_submit'])) {
           <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Sign in to our platform</h3>
           <form class="space-y-6" method="POST">
             <div>
-              <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+              <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
               <input type="username" name="sign_username" id="signUsername" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required>
             </div>
             <div>
@@ -361,15 +354,7 @@ if (isset($_POST['reg_submit'])) {
               <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
               <input type="signPassword" name="sign_password" id="signPassword" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
             </div>
-            <div class="flex justify-between">
-              <div class="flex items-start">
-                <div class="flex items-center h-5">
-                  <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required>
-                </div>
-                <label for="remember" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
-              </div>
-              <a href="#" class="text-sm text-blue-700 hover:underline dark:text-blue-500">Lost Password?</a>
-            </div>
+            
             <button type="submit" name="sign_submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login to your account</button>
             <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
               Not registered? <a data-modal-hide="account-modal" data-modal-target="register-modal" data-modal-toggle="register-modal" class="text-blue-700 hover:underline dark:text-blue-500">Create account</a>
@@ -380,7 +365,7 @@ if (isset($_POST['reg_submit'])) {
     </div>
   </div>
   <!-- Registration Modal -->
-  <div id="register-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
+  <div id="register-modal" tabindex="-1" aria-hidden="true" class=" fixed mt-8 top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
     <div class="relative w-full h-full max-w-md md:h-auto">
 
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">

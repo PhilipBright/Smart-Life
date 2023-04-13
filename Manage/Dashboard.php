@@ -1,6 +1,20 @@
 <?php 
     include('../Components/AdminNavigation.php');
 ?>
+<?php
+ 
+ $Bardata = array( 
+     array("y" => 3373.64, "label" => "Germany" ),
+     array("y" => 2435.94, "label" => "France" ),
+     array("y" => 1842.55, "label" => "China" ),
+     array("y" => 1828.55, "label" => "Russia" ),
+     array("y" => 1039.99, "label" => "Switzerland" ),
+     array("y" => 765.215, "label" => "Japan" ),
+     array("y" => 612.453, "label" => "Netherlands" )
+ );
+  
+ ?>
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,19 +24,46 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet" />
     <title>Document</title>
+  
+    <script>
+window.onload = function() {
+
+ var barchart = new CanvasJS.Chart("barContainer", {
     
+     animationEnabled: true,
+     theme:"dark2",
+     backgroundColor: "#1f2937",
+     
+     title:{
+         text: "Gold Reserves",
+        
+     },
+     axisY: {
+         title: "Gold Reserves (in tonnes)"
+     },
+     data: [{
+         type: "column",
+         yValueFormatString: "#,##0.## tonnes",
+         dataPoints: <?php echo json_encode($Bardata, JSON_NUMERIC_CHECK); ?>
+     }]
+ });
+ barchart.render();
+  
+ }
+</script>
+
 </head>
 <body class="dark:bg-gray-900">
 <main class="">
-                <div class="w-screen h-screen grid mb-4 pb-10 px-8  dark:bg-gray-900 dark:text-white">
+                <div class="w-screen h-screen grid mb-4  px-8  dark:bg-gray-900 dark:text-white">
 
                     <div class="grid grid-cols-12 gap-6">
                         <div class="grid grid-cols-12 col-span-12 gap-6 xxl:col-span-9">
-                            <div class="col-span-12 mt-8">
+                            <div class="col-span-12 mt-4">
                                 <div class="flex items-center h-10 intro-y">
                                     <h2 class="mr-5 text-lg font-medium truncate">Dashboard</h2>
                                 </div>
-                                <div class="grid grid-cols-12 gap-6 mt-5">
+                                <div class="grid grid-cols-12 gap-6 mt-4">
                                     <a class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y dark:bg-gray-800 bg-white"
                                         href="#">
                                         <div class="p-5">
@@ -87,7 +128,7 @@
                                                 <div
                                                     class="bg-yellow-500 rounded-full h-6 px-2 flex justify-items-center text-white font-semibold text-sm">
                                                     <span class="flex items-center">30%</span>
-                                                </div>
+</div>
                                             </div>
                                             <div class="ml-2 w-full flex-1">
                                                 <div>
@@ -132,11 +173,18 @@
                           
                         </div>
                     </div>
+                    <div class="w-[50%] dark:bg-gray-800 rounded-lg">
+                    <div class="m-8" id="barContainer" style="height: 370px; width: 90%; border-radius:10px;"></div>
+                    </div>
+                    </div>
+                    
                 </div>
             </main>
+
+            
             <script src="https://cdn.tailwindcss.com"></script>
             <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-           
+            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
            
 </body>
 </html>

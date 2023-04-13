@@ -14,18 +14,31 @@
 <body class="dark:bg-gray-900">
 
 <section class="w-screen h-auto bg-gray-50 dark:bg-gray-900 py-2 sm:py-5 mt-16 pr-16 ">
-    <div class="flex justify-end">
+    <div class="flex justify-between">
+    <div class="flex items-center pl-8">
+        <img src="../assets/thanks.svg" alt="" class="w-[60rem]">
+    </div>
+    <form action="UserInfo.php" method="POST">
     <div class=" w-64 h-48 dark:bg-gray-800 rounded-lg">
 
-        <h1 class="text-center font-semibold text-2xl mt-3 dark:text-white">Total Amount</h1>
-        <h1 class="text-center font-semibold text-4xl mt-5 dark:text-white">$</h1>
+        <h1 class="pt-4 text-center font-semibold text-2xl mt-3 dark:text-white">Total Amount</h1>
+        <h1 class="text-center font-semibold text-4xl mt-5 dark:text-white"> <?php $total_price = 0; // initialize total price to 0
+
+if(isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
+  foreach($_SESSION['cart'] as $product) {
+    $total_price += $product['price']*$product['Quantity']; // add the price of each selected product to the total price
+  }
+}  echo "$".$total_price ?>
+<input type="hidden" name="totalPrice" value="<?php echo $total_price ?>">
+</h1>
 
         <div class="text-center mt-8">
-        <button type="submit" name="add_to_cart" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Check Out</button>
+        <button type="submit" name="checkout" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Check Out</button>
 
         </div>
 
     </div>
+    </form>
     </div>
 </section>
 
@@ -35,7 +48,10 @@
           <div class="flex flex-col px-4 py-3 space-y-3 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
               <div class="flex items-center flex-2 space-x-4">
                   <h5>
-                      <span class="text-gray-500">Total Products:</span>
+                      <span class="text-gray-500 ">Total Products:</span>
+                      <?php if(!isset($_SESSION['cart'])) { ?>
+                      <h1 class="text-xl">You Haven't Ordered Anything Else </h1>
+                      <?php } ?>
                       <span class="dark:text-white"><?php  echo $counter = count($_SESSION['cart']); ?></span>
                   </h5>
                   <div class="w-full md:w-96">
@@ -89,6 +105,9 @@
           <div class="overflow-x-auto">
               <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                   <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+
+                 
+
                       <tr>
                       <th scope="col" class="px-2 py-3">No</th>
                            <th scope="col" class="px-2 py-3">Product ID</th>
@@ -145,21 +164,29 @@
                               </div>
                           </td>
                           <td class="px-2 py-4">
+                            <form action="./manageCart.php" method="POST">
                     <div class="flex items-center space-x-3">
-                        <button class="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
+                       <input type="hidden" name="cid" value="<?php $ckey = $key - 1; echo $ckey; ?>">
+                        <button name="minus" class="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="submit">
                             <span class="sr-only">Quantity button</span>
                             <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
                         </button>
+                        <!-- </input> -->
                         <div>
                             <input type="number" id="first_product" class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" value="<?php echo $value['Quantity']; ?>" required>
                         </div>
-                        <button class="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
+                        <button name="plus" class="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="submit">
                             <span class="sr-only">Quantity button</span>
                             <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
                         </button>
+                          
+                       
                     </div>
+                   
+                    </form>
+                   
                 </td>
-                          <td class="px-4 py-2"><?php echo  $value['price']?></td>
+                          <td class="px-4 py-2"><?php echo  $total = $value['price']*$value['Quantity']?></td>
                           <td class="px-4 py-3 flex items-center justify-center">
                                 <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
                                     <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -179,7 +206,10 @@
                                 </div>
                             </td>
                       </tr>
-                     <?php }} ?>
+                     <?php 
+                     }} 
+                        ?>
+                        
                   </tbody>
               </table>
           </div>
