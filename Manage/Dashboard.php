@@ -1,6 +1,15 @@
 <?php 
 include('../Components/connect.php');
     include('../Components/AdminNavigation.php');
+    
+    session_start();
+    if (!isset($_SESSION['visitor_count'])) {
+        $_SESSION['visitor_count'] = 1;
+      } else {
+        $_SESSION['visitor_count']++;
+      }
+   echo $_SESSION['visitor_count'];
+    
 ?>
 <?php
  
@@ -46,12 +55,7 @@ include('../Components/connect.php');
     
     
  ?>
- <?php 
-    // $sql = $db->prepare("SELECT * FROM tbl_products");
-    // $sql->execute();
-    // $num_products = $sql->rowCount();
-    
- ?>
+ 
   <?php 
     $sql = $db->prepare("SELECT * FROM tbl_category");
     $sql->execute();
@@ -129,7 +133,7 @@ window.onload = function() {
                                             </div>
                                             <div class="ml-2 w-full flex-1">
                                                 <div>
-                                                    <div class="mt-3 text-3xl font-bold leading-8"><?php echo $total_product  ?></div>
+                                                    <div class="mt-3 text-3xl font-bold leading-8"><?php echo $total_product   ?></div>
 
                                                     <div class="mt-1 text-base text-gray-600">Total Products</div>
                                                 </div>
@@ -224,12 +228,42 @@ window.onload = function() {
                     <div class="w-[50%] dark:bg-gray-800 rounded-lg">
                     <div class="m-8" id="barContainer" style="height: 370px; width: 90%; border-radius:10px;"></div>
                     </div>
+                    <div>
+  <canvas id="myChart"></canvas>
+</div>
                     </div>
                     
                 </div>
             </main>
+            <?php  ?>     
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const data = {
+    labels: ['Visitors'],
+    datasets: [{
+      label: 'Visitor Count',
+      data: [],
+      backgroundColor: [
+        'rgb(255, 99, 132)',
+      ],
+      hoverOffset: 4
+    }]
+  };
 
-            
+  const config = {
+    type: 'doughnut',
+    data: data,
+  };
+
+  var myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+</script>
+
+
+
+
             <script src="https://cdn.tailwindcss.com"></script>
             <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
             <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>

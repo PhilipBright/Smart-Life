@@ -1,5 +1,13 @@
 <?php
+session_save_path('../Main');
 session_start();
+if (!isset($_SESSION['visitor_count'])) {
+  $_SESSION['visitor_count'] = 1;
+} else {
+  $_SESSION['visitor_count']++;
+}
+
+
 include('../Components/connect.php');
 $sql = $db->prepare("SELECT * FROM tbl_users");
 $sql->execute();
@@ -290,6 +298,7 @@ if (isset($_POST['reg_submit'])) {
               <li>
                 <a href="./signOut.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                   Sign Out
+                  
                 </a>
               </li>
             <?php
@@ -321,7 +330,7 @@ if (isset($_POST['reg_submit'])) {
             <a href="#" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
           </li>
           <li>
-            <a href="#" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Service</a>
+            <a href="#" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Service </a>
           </li>
         </ul>
       </div>
