@@ -73,7 +73,7 @@
       </div>
    </div>
 </aside>
-
+    
 <div class="p-4 sm:ml-64 dark:bg-gray-900">
 
    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
@@ -413,6 +413,7 @@
                     <span class="sr-only">Close modal</span>
                 </button>
             </div>
+            
             <!-- Modal body -->
             <div class="p-6 space-y-6">
                 <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
@@ -430,6 +431,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 </body>

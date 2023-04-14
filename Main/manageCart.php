@@ -1,4 +1,5 @@
 <?php
+
     session_start();
     // if($_REQUEST['POST']){
     //     echo "YES";
@@ -34,12 +35,12 @@
                 "price" => $_POST['product_price'], "image" => $_POST['product_image'] ,
                  "description" => $_POST['product_description'] , "rating" => $_POST['product_rating'],
                  "category" => $_POST['product_cat']  , "Quantity"=>1, "Qty" => $_POST['product_qty']);
-            echo "
-                <script>
-                    alert('item added');
-                    window.location.href = 'Shop.php';
-                </script>
-            ";
+                 echo "
+                 <script>
+                     alert('item added');
+                     window.location.href = 'Shop.php';
+                 </script>
+             ";
             // echo $_SESSION['cart'];
             // echo $count;
             

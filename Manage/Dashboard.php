@@ -1,4 +1,5 @@
 <?php 
+include('../Components/connect.php');
     include('../Components/AdminNavigation.php');
 ?>
 <?php
@@ -13,6 +14,53 @@
      array("y" => 612.453, "label" => "Netherlands" )
  );
   
+ ?>
+ <?php 
+    $sql = $db->prepare("SELECT * FROM tbl_products");
+    $sql->execute();
+    $total_quantity = 0;
+    while($data = $sql->fetch(PDO::FETCH_ASSOC)){
+        extract($data);
+        $total_left += $product_qty;
+    }
+    
+ ?>
+ <?php 
+    $sql = $db->prepare("SELECT * FROM tbl_products");
+    $sql->execute();
+    $total_quantity = 0;
+    while($data = $sql->fetch(PDO::FETCH_ASSOC)){
+        extract($data);
+        $total_product += $initial_qty;
+    }
+    
+ ?>
+ <?php 
+    $sql = $db->prepare("SELECT * FROM tbl_order");
+    $sql->execute();
+    $total_sale = 0;
+    while($data = $sql->fetch(PDO::FETCH_ASSOC)){
+        extract($data);
+        $total_sale += $order_quantity;
+    }
+    
+    
+ ?>
+ <?php 
+    // $sql = $db->prepare("SELECT * FROM tbl_products");
+    // $sql->execute();
+    // $num_products = $sql->rowCount();
+    
+ ?>
+  <?php 
+    $sql = $db->prepare("SELECT * FROM tbl_category");
+    $sql->execute();
+    $num_cat = $sql->rowCount();
+    
+ ?>
+ <?php
+    $percentage = ($total_sale/ $total_product) * 100
+
  ?>
  
 <!DOCTYPE html>
@@ -81,7 +129,7 @@ window.onload = function() {
                                             </div>
                                             <div class="ml-2 w-full flex-1">
                                                 <div>
-                                                    <div class="mt-3 text-3xl font-bold leading-8">300</div>
+                                                    <div class="mt-3 text-3xl font-bold leading-8"><?php echo $total_product  ?></div>
 
                                                     <div class="mt-1 text-base text-gray-600">Total Products</div>
                                                 </div>
@@ -105,7 +153,7 @@ window.onload = function() {
                                             </div>
                                             <div class="ml-2 w-full flex-1">
                                                 <div>
-                                                    <div class="mt-3 text-3xl font-bold leading-8">5</div>
+                                                    <div class="mt-3 text-3xl font-bold leading-8"><?php echo $num_cat ?></div>
 
                                                     <div class="mt-1 text-base text-gray-600">Total Category</div>
                                                 </div>
@@ -127,12 +175,12 @@ window.onload = function() {
                                                 </svg>
                                                 <div
                                                     class="bg-yellow-500 rounded-full h-6 px-2 flex justify-items-center text-white font-semibold text-sm">
-                                                    <span class="flex items-center">30%</span>
+                                                    <span class="flex items-center"><?php echo $percentage."%" ?></span>
 </div>
                                             </div>
                                             <div class="ml-2 w-full flex-1">
                                                 <div>
-                                                    <div class="mt-3 text-3xl font-bold leading-8">100</div>
+                                                    <div class="mt-3 text-3xl font-bold leading-8"><?php echo $total_sale ?></div>
 
                                                     <div class="mt-1 text-base text-gray-600">Product Sales</div>
                                                 </div>
@@ -156,7 +204,7 @@ window.onload = function() {
                                             </div>
                                             <div class="ml-2 w-full flex-1">
                                                 <div>
-                                                    <div class="mt-3 text-3xl font-bold leading-8">200</div>
+                                                    <div class="mt-3 text-3xl font-bold leading-8"><?php echo $total_left; ?></div>
 
                                                     <div class="mt-1 text-base text-gray-600">Stock Left</div>
                                                 </div>

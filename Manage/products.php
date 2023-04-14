@@ -329,7 +329,7 @@ $sql->execute();
 </html>
 
 <?php 
-    $sql = "INSERT INTO tbl_products(product_title, product_description, product_price, product_image_name, product_rating, category_for, product_qty ) VALUE(?,?,?,?,?,?,?)";
+    $sql = "INSERT INTO tbl_products(product_title, product_description, product_price, product_image_name, product_rating, category_for, product_qty, initial_qty ) VALUE(?,?,?,?,?,?,?,?)";
     $sq  = $db->prepare($sql);
     if(isset($_POST['submit'])){
         if (isset($_FILES['image'])) {
@@ -369,7 +369,7 @@ $sql->execute();
             // $active = $_POST['active'];
             
     
-           $sq->execute(array($title, $description, $price, $image, $rating, $category, $qty));
+           $sq->execute(array($title, $description, $price, $image, $rating, $category, $qty, $qty));
            
            
            }
