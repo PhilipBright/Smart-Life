@@ -3,16 +3,8 @@
 include('./Navigation.php');
 include('./cursor.php');
 
-session_start();
-if (!isset($_SESSION['visitor_count'])) {
-  $_SESSION['visitor_count'] = 1;
-} else {
-  $_SESSION['visitor_count']++;
-}
 
 
-$sql = $db->prepare("SELECT * FROM tbl_category");
-$sql->execute();
 ?>
 
 <!DOCTYPE html>
@@ -41,20 +33,23 @@ $sql->execute();
       padding: 0;
     }
 
-    swiper-container {
-      width: 100%;
-      
-    }
+    .swiper {
+  width: 100%;
+  height: 550px;
+  display: flex;
+  
+}
 
-    swiper-slide {
+
+    .swiper-slide {
       
       width: 500px;
       height: 500px;
     }
 
-    swiper-slide img {
+    .swiper-slide img {
       display: block;
-      width: 100%;
+      width: 99%;
     }
     .bounce {
   animation-name: bounce;
@@ -76,34 +71,6 @@ $sql->execute();
     
   
   </style>
-  <!-- Start of Async Drift Code -->
-<script>
-"use strict";
-
-!function() {
-  var t = window.driftt = window.drift = window.driftt || [];
-  if (!t.init) {
-    if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
-    t.invoked = !0, t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ], 
-    t.factory = function(e) {
-      return function() {
-        var n = Array.prototype.slice.call(arguments);
-        return n.unshift(e), t.push(n), t;
-      };
-    }, t.methods.forEach(function(e) {
-      t[e] = t.factory(e);
-    }), t.load = function(t) {
-      var e = 3e5, n = Math.ceil(new Date() / e) * e, o = document.createElement("script");
-      o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js";
-      var i = document.getElementsByTagName("script")[0];
-      i.parentNode.insertBefore(o, i);
-    };
-  }
-}();
-drift.SNIPPET_VERSION = '0.3.1';
-drift.load('maekrgadeivs');
-</script>
-<!-- End of Async Drift Code -->
 </head>
 
 
@@ -154,19 +121,20 @@ drift.load('maekrgadeivs');
 
 
 
-    <div class=" w-screen h-[75%] dark:bg-gray-900 bg-white pt-8 pb-[3rem] lg:h-[85%] lg:pb-[3rem]">
+    <div class=" w-screen h-[75%] dark:bg-gray-900 bg-white pt-8 pb-[3rem] lg:h-[85%] lg:pb-[1rem]">
     <div class="flex justify-center ">
       <h1 class="text-4xl font-bold dark:text-white">Product Category</h1>
     </div>
-    <swiper-container class="mySwiper w-screen h-[36rem] pl-12" pagination="true" effect="coverflow" grab-cursor="true" centered-slides="true"
-    slides-per-view="auto" coverflow-effect-rotate="50" 
-    coverflow-effect-modifier="1" coverflow-effect-slide-shadows="false">
+    <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
 
     <?php
+    $sql = $db->prepare("SELECT * FROM tbl_category");
+    $sql->execute();
       while($data = $sql->fetch(PDO::FETCH_ASSOC)){
         extract($data);
     ?>
-    <swiper-slide>
+    <div class="swiper-slide">
       <form method="POST" action="./manageCart.php" enctype="multipart/form-data">
     <div class=" w-[70%]  m-[3rem] max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
    
@@ -186,12 +154,14 @@ drift.load('maekrgadeivs');
     </div>
 </div>
 </form>
-    </swiper-slide>
-
+    </div>
+      
     <?php
       }
     ?>
-  </swiper-container>
+    </div>
+    <div class="swiper-pagination "></div>
+  </div>
 
 </div>
 
@@ -313,8 +283,27 @@ drift.load('maekrgadeivs');
 
 
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
+  <!-- <script>
+  const swiper = new Swiper('.mySwiper', {
+    // Optional parameters
+    direction: 'horizontal',
+    loop: true,
 
-  <script>
+    // If we need pagination
+    pagination: {
+      el: '.swiper-pagination',
+    },
+
+    // Navigation arrows
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+</script> -->
+  <!-- <script>
     var cont = 0;
 
     function loopSlider() {
@@ -381,7 +370,27 @@ drift.load('maekrgadeivs');
       loopSlider();
 
     });
+  </script> -->
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      effect: "coverflow",
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: "auto",
+      coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 0,
+        modifier: 1,
+        slideShadows: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+      },
+    });
   </script>
+ 
+
   <script>
    const text = "We invest in the world’s potential";
 let index = 0;
@@ -403,8 +412,6 @@ const typingInterval = setInterval(type, 100);
   
  
 
-  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
 
 </body>
 
