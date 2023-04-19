@@ -34,7 +34,7 @@ include('../Components/AdminNavigation.php');
             <!-- Modal body -->
             <div class="p-6 space-y-6">
 
-<form action="category.php" method="POST" enctype="multipart/form-data" >
+<form method="POST" enctype="multipart/form-data" >
   <div class="mb-6">
     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category Name</label>
     <input name="title" type="text"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
@@ -67,10 +67,13 @@ include('../Components/AdminNavigation.php');
 </html>
 <?php 
         //submit button task
+        
         $sql = "INSERT INTO tbl_category(cat_title, cat_description, cat_image_name) VALUE(?,?,?)";
         $sq  = $db->prepare($sql);
+        
             if(isset($_POST['submit'])){
                 if (isset($_FILES['image'])) {
+                    
                     $error = array();
             
                     $filename = $_FILES['image']['name']; //logo.jpg
@@ -91,7 +94,7 @@ include('../Components/AdminNavigation.php');
                         move_uploaded_file($filetmp, "../assets/" . $filename);
                     }
                 }
-        
+                try{
                $title = $_POST['title'];
                $description = $_POST['description'];
               $image = $filename;
@@ -100,7 +103,7 @@ include('../Components/AdminNavigation.php');
                 // $active = $_POST['active'];
         
         
-            try{
+                
                 $sq->execute(array($title, $description, $image));
               
             }

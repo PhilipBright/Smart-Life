@@ -1,5 +1,7 @@
 
-
+<?php 
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -113,23 +115,26 @@
     </div>
     
     <div class="flex w-screen  justify-end">
-    <button type="button" class=" w-12 h-12 mr-5  text-sm bg-gray-800 rounded-[50%]  focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-        <span class="sr-only">Open user menu</span>
-        <img src="../assets/luffy.jpg" alt="" class="w-12 h-12  rounded-[50%]">
+    <button type="button" class=" w-8 h-8 mr-5  text-sm bg-gray-800 rounded-[50%]  focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+    <?php if (!isset($_SESSION['A_image'])) { ?>
+            <img class="w-8 h-8 rounded-full" src="../assets/user.png">
+          <?php } else { ?>
+            <img class="w-8 h-8 rounded-full" src="../assets/<?php echo $_SESSION['A_image'] ?>">
+          <?php } ?>
       </button>
       
     <div class=" z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
         <div class="px-4 py-3">
-          <span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-          <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
+          <span class="block text-sm text-gray-900 dark:text-white"><?php echo $_SESSION['A_username'] ?></span>
+          <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400"><?php echo $_SESSION['A_email'] ?></span>
         </div>
         <ul class="py-2" aria-labelledby="user-menu-button">
           
         <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Switch to Shopping</a>
+            <a href="../Main/Home.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Switch to Shopping</a>
           </li>
           <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+            <a href="../Manage/signOut.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
           </li>
         </ul>
       </div>
@@ -198,6 +203,12 @@
                   <span class="ml-3">Orders</span>
               </a>
           </li>
+          <li>
+            <a href="../Manage/AdminAcc.php" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+               <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+               <span class="flex-1 ml-3 whitespace-nowrap">Admins</span>
+            </a>
+         </li>
          <li>
             <a href="../Manage/addUser.php" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>

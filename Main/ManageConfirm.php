@@ -34,8 +34,8 @@
             $sq->execute(array($username, $address, $phone, $email, $postalcode, $itemname, $itemquantity, $eprice, $totalAmount, $current_date, $discount, $payment, $cus_for));
             
             // Get the current quantity of the product
-        $hi = "SELECT product_qty FROM tbl_products WHERE product_id = $id";
-        $result = $db->prepare($hi);
+        $query = "SELECT product_qty FROM tbl_products WHERE product_id = $id";
+        $result = $db->prepare($query);
         $result->execute();
         $row = $result->fetch(PDO::FETCH_ASSOC);
         $quantity = $row['product_qty'];

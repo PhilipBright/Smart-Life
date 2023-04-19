@@ -1,14 +1,9 @@
 <?php
-session_save_path('../Main');
-session_start();
-if (!isset($_SESSION['visitor_count'])) {
-  $_SESSION['visitor_count'] = 1;
-} else {
-  $_SESSION['visitor_count']++;
-}
+
 
 
 include('../Components/connect.php');
+session_start();
 $sql = $db->prepare("SELECT * FROM tbl_users");
 $sql->execute();
 
@@ -86,6 +81,7 @@ if (isset($_POST['reg_submit'])) {
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.css" rel="stylesheet" />
 
   <title>Navigation</title>
+ 
   
 <style>
   .nav{
@@ -194,7 +190,7 @@ if (isset($_POST['reg_submit'])) {
       <div class="md:w-7/12 flex items-center text-end md:order-2 justify-end lg:relative lg:ml-32">
 
         <div>
-          <form method="GET" class="hidden lg:block pr-5 toggleSidebarMobileSearch ">
+          <form action="Search.php" method="POST" class="hidden lg:block pr-5 toggleSidebarMobileSearch ">
             <label for="topbar-search" class="sr-only">Search</label>
             <div class="relative mt-1  lg:w-64">
               <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -202,7 +198,7 @@ if (isset($_POST['reg_submit'])) {
                   <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
                 </svg>
               </div>
-              <input type="text" name="email" id="topbar-search" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search">
+              <input type="text" name="search" id="live_search" onkeydown="if (event.keyCode == 13) this.form.submit();" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search">
             </div>
           </form>
 
@@ -216,6 +212,7 @@ if (isset($_POST['reg_submit'])) {
           </button>
 
         </div>
+        <div id="searchresult"></div>
 
         <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
           <span class="sr-only">Open user menu</span>
@@ -273,10 +270,11 @@ if (isset($_POST['reg_submit'])) {
         <div class=" z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
           <div class="px-4 py-3">
             <span class="block text-sm text-gray-900 dark:text-white"><?php echo $_SESSION['U_username'] ?></span>
-            <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400"><?php
-                                                                                              if (!isset($_SESSION['U_username'])) {
-                                                                                                echo "User is not logged in";
-                                                                                              } else echo $_SESSION['U_email'] ?></span>
+            <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">
+              <?php
+                   if (!isset($_SESSION['U_username'])) {
+                    echo "User is not logged in";
+                    } else echo $_SESSION['U_email'] ?></span>
           </div>
           <ul class="py-2" aria-labelledby="user-menu-button">
             
@@ -289,6 +287,11 @@ if (isset($_POST['reg_submit'])) {
           </li> -->
             <?php if (!isset($_SESSION['U_username'])) {
             ?>
+            <li>
+                <a href="../Manage/Login.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                  I am Root User
+                </a>
+              </li>
               <li>
                 <a data-modal-target="account-modal" data-modal-toggle="account-modal" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                   Sign in
@@ -321,16 +324,16 @@ if (isset($_POST['reg_submit'])) {
             <a href="./Home.php" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" aria-current="page">Home</a>
           </li>
           <li>
-            <a href="./Category.php" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Category</a>
+            <a href="#Category" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Category</a>
           </li>
           <li>
             <a href="./Shop.php" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Shop</a>
           </li>
           <li>
-            <a href="#" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
+            <a href="#About" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
           </li>
           <li>
-            <a href="#" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Service </a>
+            <a href="#Service" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Service </a>
           </li>
         </ul>
       </div>
@@ -373,6 +376,8 @@ if (isset($_POST['reg_submit'])) {
       </div>
     </div>
   </div>
+  <!-- Admin Panel -->
+  
   <!-- Registration Modal -->
   <div id="register-modal" tabindex="-1" aria-hidden="true" class=" fixed mt-8 top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
     <div class="relative w-full h-full max-w-md md:h-auto">
@@ -423,6 +428,7 @@ if (isset($_POST['reg_submit'])) {
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.js"></script>
  
+
 
   <script>
     function Show() {

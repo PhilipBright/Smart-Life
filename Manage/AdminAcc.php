@@ -1,7 +1,7 @@
 <?php 
 include('../Components/connect.php'); 
 include('../Components/AdminNavigation.php');
-$sql = $db->prepare("SELECT * FROM tbl_users");
+$sql = $db->prepare("SELECT * FROM tbl_admin");
 $sql->execute();
 
 ?>
@@ -24,7 +24,7 @@ $sql->execute();
             </button>
             <div class="px-6 py-6 lg:px-8">
                 <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Add New User</h3>
-                <form class="space-y-6" action="#" method="POST" enctype="multipart/form-data">
+                <form class="space-y-6" action="LoginManage.php" method="POST" enctype="multipart/form-data">
                 <div>
                         <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
                         <input type="username" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
@@ -57,12 +57,12 @@ $sql->execute();
                     <div class="flex items-center flex-2 space-x-4">
                         <h5>
                         <?php 
-    $sql = $db->prepare("SELECT * FROM tbl_users");
+    $sql = $db->prepare("SELECT * FROM tbl_admin");
     $sql->execute();
     $num_users = $sql->rowCount();
     
  ?>
-                            <span class="text-gray-500">Total Users:</span>
+                            <span class="text-gray-500">Total Admins:</span>
                             <span class="dark:text-white"><?php echo $num_users ?></span>
                         </h5>
                        
@@ -102,7 +102,7 @@ $sql->execute();
                     Update
                 </th>
                 <th scope="col" class="pl-8 py-3">
-                   Delete
+                    Delete
                 </th>
             </tr>
         </thead>
@@ -115,20 +115,20 @@ $sql->execute();
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             
             <td class="pl-12 py-2">
-                                    <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300"><?php echo $user_id ?></span>
+                                    <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300"><?php echo $admin_id ?></span>
                                 </td>
                 <td scope="row" class="ml-28 flex items-center  py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                    <img class="w-10 h-10 rounded-full" src="../assets/<?php echo $user_image ?>" alt="">
+                    <img class="w-10 h-10 rounded-full" src="../assets/<?php echo $admin_image ?>" alt="">
                     
                 </td>
                 <td class="pl-24 py-4">
-                <div class="text-base font-bold"><?php echo $username ?></div>
+                <div class="text-base font-bold"><?php echo $admin_username ?></div>
                 </td>
                 <td class="pl-24 py-4">
-                <div class="font-normal text-gray-500"><?php echo $user_email ?></div>
+                <div class="font-normal text-gray-500"><?php echo $admin_email ?></div>
                 </td>
                 <td class="pl-8 py-4">
-                <div class="font-normal text-gray-500"><?php echo $password ?></div>
+                <div class="font-normal text-gray-500"><?php echo $admin_password ?></div>
                 </td>
                 <th class="px-4 py-3  ">
                                    
@@ -140,7 +140,7 @@ $sql->execute();
                                             </li>
                                         </ul> -->
                                         <div class="py-1">
-                                        <a href="./Edit.php?Uupdate=<?php echo $user_id?>" class="block py-2 px-4 hover:bg-gray-100 hover:rounded-lg dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                        <a href="./Edit.php?Aupdate=<?php echo $admin_id?>" class="block py-2 px-4 hover:bg-gray-100 hover:rounded-lg dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
                                         </div>
                                     </div>
                                 </th>
@@ -149,7 +149,7 @@ $sql->execute();
                                     <div  class=" z-10 w-20 bg-white rounded-lg divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                                         
                                         <div class="py-1">
-                                        <a href="./Edit.php?Udelete=<?php echo $user_id?>"  class="block py-2 px-4 text-sm text-gray-700 hover:rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete </a>
+                                        <a href="./Edit.php?Adelete=<?php echo $admin_id?>"  class="block py-2 px-4 text-sm text-gray-700 hover:rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete </a>
 
                                     </div>
                                     </div>
@@ -176,39 +176,3 @@ $sql->execute();
 </body>
 </html>
 
-<?php 
-$sql = "INSERT INTO tbl_users(user_image, username, password, user_email) VALUE (?,?,?,?)";
-$sq = $db->prepare($sql);
-if(isset($_POST['submit'])){
-    if (isset($_FILES['userImage'])) {
-        $error = array();
-
-       $filenames = $_FILES['userImage']['name']; //logo.jpg
-        $filsize  = $_FILES['userImage']['size']; //2345678 bytes
-        $filetype = $_FILES['userImage']['type']; //logo/jpg
-        $filetmp  = $_FILES['userImage']['tmp_name']; //astadf
-
-        $file_ex = explode("/", $filetype);
-        $filex = strtolower(end($file_ex));
-
-        $extension = array("jpg", "png", "jpeg", "gif", "jif", "webp", "jfif");
-
-        if (in_array($filex, $extension) == FALSE) {
-            $error[] = "File type mharr ny tal";
-        } elseif ($filsize > 2097152) {
-            $error[] = "Taw taw kyee";
-        } elseif (empty($error) == TRUE) {
-            move_uploaded_file($filetmp, "../assets/" . $filenames);
-        }
-    }
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-  $userImage = $filenames;
-     $userEmail = $_POST['email'];
-
-    $sq->execute(array($userImage, $username, $password, $userEmail ));
-        echo "data Inserted";
-
-}
-
-?>

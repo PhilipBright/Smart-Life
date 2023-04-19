@@ -99,7 +99,7 @@ include('./cursor.php');
     </div>
 
 
-    <section class="bg-white dark:bg-gray-800">
+    <section id="About" class="bg-white dark:bg-gray-800">
       <div class="flex justify-center">
     <h2 class="mt-8 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">We didn't reinvent the wheel</h2>
     </div>
@@ -121,7 +121,7 @@ include('./cursor.php');
 
 
 
-    <div class=" w-screen h-[75%] dark:bg-gray-900 bg-white pt-8 pb-[3rem] lg:h-[85%] lg:pb-[1rem]">
+    <div id="Category" class=" w-screen h-[75%] dark:bg-gray-900 bg-white pt-8 pb-[3rem] lg:h-[85%] lg:pb-[1rem]">
     <div class="flex justify-center ">
       <h1 class="text-4xl font-bold dark:text-white">Product Category</h1>
     </div>
@@ -135,8 +135,8 @@ include('./cursor.php');
         extract($data);
     ?>
     <div class="swiper-slide">
-      <form method="POST" action="./manageCart.php" enctype="multipart/form-data">
-    <div class=" w-[70%]  m-[3rem] max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+     
+    <div class="ml-[15%] w-[70%]  m-[3rem] max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
    
      
         <img  class="p-4 mx-auto w-80 h-80 rounded fly_img" src="../assets/<?php echo $cat_image_name ?>" alt="product image"  />
@@ -144,16 +144,16 @@ include('./cursor.php');
     <div class="px-5 pb-5">
         
             <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white"><?php echo $cat_title ?></h5>
-            <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white"> Description </h5>
+            <h5 class="text-sm font-bold tracking-tight text-gray-900 dark:text-gray-400"><?php echo $cat_description ?> </h5>
        
         
         <div class="flex items-center justify-end">
            
-            <button type="submit" name="add_to_cart" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">View More</button>
+            <a href="./Shop.php" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">View More</a>
         </div>
     </div>
 </div>
-</form>
+
     </div>
       
     <?php
@@ -168,23 +168,23 @@ include('./cursor.php');
 
 
 <div id="Service" class="w-screen pt-5 px-6  h-auto columns-2xs lg:columns-2 xs:columns-1 dark:text-white dark:bg-gray-800 bg-white" >
-      <div class="lg:w-[120%] ">
+      <div class="lg:w-[130%] ">
         <div class="w-auto h-auto pt-8">
-          <h1 class="font-bold text-6xl pb-5">Delivery Service</h1>
+          <h1 class="font-bold text-6xl pb-5">Services from Smart Life</h1>
          
         </div>
         <div class="mt-8">
         
-<h3 class="mb-3 font-normal text-3xl text-gray-500 dark:text-gray-400">Track work across the enterprise through an open</h3>
-<h3 class="lg:ml-16 mt-4 text-3xl font-normal text-gray-500 dark:text-gray-400">Deliver great service experiences fast</h3>
-<h3 class="lg:ml-32 mt-4 text-3xl font-normal text-gray-500 dark:text-gray-400">Deliver great service experiences fast</h3>
-<h3 class="lg:ml-64 mt-4 text-3xl font-normal text-gray-500 dark:text-gray-400">Deliver great service experiences fast</h3>
-<h3 class="lg:ml-80 mt-4 text-3xl font-normal text-gray-500 dark:text-gray-400">Deliver great service experiences fast</h3>
+<h3 class="mb-3 font-normal text-3xl text-gray-500 dark:text-gray-400">The Best and Free Delivery of All Time</h3>
+<h3 class="lg:ml-16 mt-4 text-3xl font-normal text-gray-500 dark:text-gray-400">Warranty 100% Guarantee to Refund</h3>
+<h3 class="lg:ml-32 mt-4 text-3xl font-normal text-gray-500 dark:text-gray-400">A Hassle-Free Experience with Free Home Setup</h3>
+<h3 class="lg:ml-64 mt-4 text-3xl font-normal text-gray-500 dark:text-gray-400">Get Help with Our 24/7 Online Support</h3>
+<h3 class="lg:ml-80 mt-4 text-3xl font-normal text-gray-500 dark:text-gray-400">Comprehensive Business-to-Business</h3>
 </div>
         
       </div>
       <div>
-      <div class="w-auto h-auto lg:ml-32">
+      <div class="w-auto h-auto lg:ml-28">
           <img src="../assets/deli.svg" alt="" class="lg:w-[100%] " >
         </div>
       </div>

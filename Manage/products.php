@@ -66,6 +66,7 @@ $sql->execute();
 
                                 <th scope="col" class="px-4 py-3">Price</th>
                                 <th scope="col" class="px-4 py-3">Update</th>
+                                <th scope="col" class="px-4 py-3">Delete</th>
                             </tr>
                         </thead>
                         <?php
@@ -111,22 +112,28 @@ $sql->execute();
                                 <th class="px-12 py-2"><?php echo $product_qty ?></th>
 
                                 <th class="px-4 py-2"><?php echo "$".$product_price ?></th>
-                                <th class="px-4 py-3 flex items-center justify-center">
-                                    <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
-                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                                        </svg>
-                                    </button>
-                                    <div id="apple-imac-27-dropdown" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="apple-imac-27-dropdown-button">
+                                <th class="px-4 py-3  ">
+                                   
+                                    <div class=" z-10 w-16 bg-white rounded-lg divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                        <!-- <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="apple-imac-27-dropdown-button">
 
                                             <li>
                                                 <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
                                             </li>
-                                        </ul>
+                                        </ul> -->
                                         <div class="py-1">
-                                            <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+                                        <a href="./Edit.php?Pupdate=<?php echo $product_id?>" class="block py-2 px-4 hover:bg-gray-100 hover:rounded-lg dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
                                         </div>
+                                    </div>
+                                </th>
+                                <th class="px-4 py-3 ">
+                                   
+                                    <div  class=" z-10 w-20 bg-white rounded-lg divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                        
+                                        <div class="py-1">
+                                        <a href="./Edit.php?Pdelete=<?php echo $product_id?>"  class="block py-2 px-4 text-sm text-gray-700 hover:rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete </a>
+
+                                    </div>
                                     </div>
                                 </th>
                             </tr>
@@ -158,7 +165,7 @@ $sql->execute();
                     </button>
                     <div class="px-6 py-6 lg:px-8">
                         <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Add New Product</h3>
-                        <form class="space-y-6" method="POST" enctype="multipart/form-data">
+                        <form class="space-y-6" method="POST" enctype="multipart/form-data" action="addProduct.php">
                             <div>
                                 <label for="Product Name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Name</label>
                                 <input type="text" name="product_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
@@ -297,53 +304,4 @@ $sql->execute();
 
 </html>
 
-<?php 
-    $sql = "INSERT INTO tbl_products(product_title, product_description, product_price, product_image_name, product_rating, category_for, product_qty, initial_qty ) VALUE(?,?,?,?,?,?,?,?)";
-    $sq  = $db->prepare($sql);
-    if(isset($_POST['submit'])){
-        if (isset($_FILES['image'])) {
-            $error = array();
-    
-           $filenames = $_FILES['image']['name']; //logo.jpg
-            $filsize  = $_FILES['image']['size']; //2345678 bytes
-            $filetype = $_FILES['image']['type']; //logo/jpg
-            $filetmp  = $_FILES['image']['tmp_name']; //astadf
-    
-            $file_ex = explode("/", $filetype);
-            $filex = strtolower(end($file_ex));
-    
-            $extension = array("jpg", "png", "jpeg", "gif", "jif", "webp", "jfif");
-    
-            if (in_array($filex, $extension) == FALSE) {
-                $error[] = "File type mharr ny tal";
-            } elseif ($filsize > 2097152) {
-                $error[] = "Taw taw kyee";
-            } elseif (empty($error) == TRUE) {
-                move_uploaded_file($filetmp, "../assets/" . $filenames);
-            }
-        }
-          
-    
-         $title = $_POST['product_name'];
-         $description = $_POST['product_description'];
-          $price = $_POST['product_price'];
-          $image = $filenames;
-          $rating = $_POST["rating"];
-          $category = $_POST["category"];
-          $qty = $_POST["product_quantity"];
-    
-        
 
-            
-            // $active = $_POST['active'];
-            
-    
-           $sq->execute(array($title, $description, $price, $image, $rating, $category, $qty, $qty));
-           
-           
-           }
-           
-           
-    
-        
-?>

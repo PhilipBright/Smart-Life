@@ -1,5 +1,8 @@
 <?php 
-    $sql = "INSERT INTO tbl_products(product_title, product_description, product_price, product_image_name, product_rating, category_for ) VALUE(?,?,?,?,?,?)";
+
+
+include('../Components/connect.php');
+    $sql = "INSERT INTO tbl_products(product_title, product_description, product_price, product_image_name, product_rating, category_for, product_qty, initial_qty ) VALUE(?,?,?,?,?,?,?,?)";
     $sq  = $db->prepare($sql);
     if(isset($_POST['submit'])){
         if (isset($_FILES['image'])) {
@@ -31,6 +34,7 @@
           $image = $filenames;
           $rating = $_POST["rating"];
           $category = $_POST["category"];
+          $qty = $_POST["product_quantity"];
     
         
 
@@ -38,11 +42,11 @@
             // $active = $_POST['active'];
             
     
-           if($sq->execute(array($title, $description, $price, $image, $rating, $category))){
-           header('Location: pd.php');
+           $sq->execute(array($title, $description, $price, $image, $rating, $category, $qty, $qty));
+           
            
            }
-           }
+           
            
     
         

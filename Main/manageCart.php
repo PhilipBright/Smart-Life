@@ -1,17 +1,6 @@
 <?php
-
     session_start();
-    // if($_REQUEST['POST']){
-    //     echo "YES";
-    // }
     if(isset($_POST['add_to_cart'])){
-        // echo $_POST['product_id'];
-        // echo $_POST['product_name'];
-        // echo $_POST['product_price'];
-        // echo $_POST['product_image'];
-        // echo $_POST['product_description'];
-        // echo $_POST['product_rating'];
-        // echo $_POST['product_cat'];
         if(!isset($_SESSION['U_username'])){
             echo"<script>
             alert('Please Login to go shopping!!');
@@ -27,7 +16,6 @@
                     window.location.href = 'Shop.php';
                 </script>
             ";
-            // echo "item added";
             }
             else{
                 $count = count($_SESSION['cart']);
@@ -41,9 +29,7 @@
                      window.location.href = 'Shop.php';
                  </script>
              ";
-            // echo $_SESSION['cart'];
-            // echo $count;
-            
+
             }
         }
         else{

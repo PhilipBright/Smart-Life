@@ -5,9 +5,7 @@ include('../Components/connect.php');
     if(isset($_SESSION['U_email'])){
         $cusMail = $_SESSION['U_email'];
     };
-   
-    
-   
+
     if(isset($_POST['Psubmit'])){
     $username = $_POST['username'];
     $email = $_POST['email'];
@@ -16,8 +14,7 @@ include('../Components/connect.php');
     $postalcode = $_POST['postalcode'];
     $paymentType = $_POST['payment'];
     $totalAmount = $_POST['total'];
-    
-    
+
     switch($paymentType){
         case 'COD': $payment = 'Cash on Delivery';
         break;
