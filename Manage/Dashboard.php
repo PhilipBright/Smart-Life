@@ -3,27 +3,59 @@ include('../Components/connect.php');
     include('../Components/AdminNavigation.php');
     
     session_start();
-    if (!isset($_SESSION['visitor_count'])) {
-        $_SESSION['visitor_count'] = 1;
-      } else {
-        $_SESSION['visitor_count']++;
-      }
-   echo $_SESSION['visitor_count'];
+  
     
 ?>
 <?php
+
+ $sql = $db->prepare("SELECT * FROM tbl_order WHERE cat_for = 2");
+ $sql->execute();
+ $Personal_sale = 0; // Initialize $Personal_sale to 0
+ while($data = $sql->fetch(PDO::FETCH_ASSOC)){
+     extract($data);
+     $Personal_sale += $order_quantity;
+ }
+ $sql = $db->prepare("SELECT * FROM tbl_order WHERE cat_for = 1");
+ $sql->execute();
+ $Sport_sale = 0; // Initialize $Personal_sale to 0
+ while($data = $sql->fetch(PDO::FETCH_ASSOC)){
+     extract($data);
+     $Sport_sale += $order_quantity;
+ }
+ $sql = $db->prepare("SELECT * FROM tbl_order WHERE cat_for = 3");
+ $sql->execute();
+ $Home_sale = 0; // Initialize $Personal_sale to 0
+ while($data = $sql->fetch(PDO::FETCH_ASSOC)){
+     extract($data);
+     $Home_sale += $order_quantity;
+ }
+ $sql = $db->prepare("SELECT * FROM tbl_order WHERE cat_for = 4");
+ $sql->execute();
+ $Car_sale = 0; // Initialize $Personal_sale to 0
+ while($data = $sql->fetch(PDO::FETCH_ASSOC)){
+     extract($data);
+     $Car_sale += $order_quantity;
+ }
+ $sql = $db->prepare("SELECT * FROM tbl_order WHERE cat_for = 5");
+ $sql->execute();
+ $Health_sale = 0; // Initialize $Personal_sale to 0
+ while($data = $sql->fetch(PDO::FETCH_ASSOC)){
+     extract($data);
+     $Health_sale += $order_quantity;
+ }
  
  $Bardata = array( 
-     array("y" => 3373.64, "label" => "Germany" ),
-     array("y" => 2435.94, "label" => "France" ),
-     array("y" => 1842.55, "label" => "China" ),
-     array("y" => 1828.55, "label" => "Russia" ),
-     array("y" => 1039.99, "label" => "Switzerland" ),
-     array("y" => 765.215, "label" => "Japan" ),
-     array("y" => 612.453, "label" => "Netherlands" )
+     array("y" => $Personal_sale, "label" => "Personal Assistant" ),
+     array("y" => $Sport_sale, "label" => "Sport" ),
+     array("y" => $Home_sale, "label" => "Home Equipment" ),
+     array("y" => $Car_sale, "label" => "Smart Car" ),
+     array("y" => $Health_sale, "label" => "Health Care" ),    
  );
-  
- ?>
+ 
+
+?>
+
+
  <?php 
     $sql = $db->prepare("SELECT * FROM tbl_products");
     $sql->execute();
@@ -66,6 +98,18 @@ include('../Components/connect.php');
     $percentage = ($total_sale/ $total_product) * 100
 
  ?>
+  <?php 
+    $sql = $db->prepare("SELECT * FROM tbl_users");
+    $sql->execute();
+    $num_user = $sql->rowCount();
+    
+ ?>
+  <?php 
+    $sql = $db->prepare("SELECT * FROM tbl_admin");
+    $sql->execute();
+    $num_admin = $sql->rowCount();
+    
+ ?>
  
 <!DOCTYPE html>
 <html lang="en">
@@ -75,6 +119,8 @@ include('../Components/connect.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet" />
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
     <title>Document</title>
   
     <script>
@@ -87,15 +133,15 @@ window.onload = function() {
      backgroundColor: "#1f2937",
      
      title:{
-         text: "Gold Reserves",
+         text: "Sale Rate",
         
      },
      axisY: {
-         title: "Gold Reserves (in tonnes)"
+         title: "Present Sale Rate"
      },
      data: [{
          type: "column",
-         yValueFormatString: "#,##0.## tonnes",
+         yValueFormatString: "#### Products",
          dataPoints: <?php echo json_encode($Bardata, JSON_NUMERIC_CHECK); ?>
      }]
  });
@@ -103,6 +149,7 @@ window.onload = function() {
   
  }
 </script>
+
 
 </head>
 <body class="dark:bg-gray-900">
@@ -218,55 +265,70 @@ window.onload = function() {
                                 </div>
                             </div>
                             <div class="col-span-12 mt-5">
-                                <div class="grid gap-2 grid-cols-1 lg:grid-cols-2 ">
-                                   
+                                <div class="w-[100%] grid gap-2 grid-cols-1 lg:grid-cols-2 ">
+                                <div class="w-[100%] dark:bg-gray-800 rounded-lg">
+                    <div class="m-8" id="barContainer" style="height: 370px; width: 90%; border-radius:10px;"></div>
+                    </div>
+                   
+ 
+                <div class="ml-32">
+                <div class="ml-2 w-96 h-48  p-5 m-5 dark:bg-gray-800 rounded-lg">
+                <div class="flex justify-between">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-yellow-400"
+                                                    fill="#91F5AD" viewBox="0 0 448 512" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
+                                                    </svg>
+                                                <div
+                                                    class="bg-red-500 rounded-full h-6 px-2 flex justify-items-center text-white font-semibold text-sm">
+                                                    <span class="flex items-center">30%</span>
+                                                </div>
+                                            </div>
+                                                <div>
+                                                    <div class="mt-3 text-[5rem] text-center font-bold leading-8 p-8"><?php echo $num_user ?></div>
+
+                                                    <div class="mt-1 text-base text-gray-600">Total Users</div>
+                                                </div>
+                                            </div>
+                                            <div class="ml-2 w-96 h-48  p-5 m-5 dark:bg-gray-800 rounded-lg">
+                                            <div class="flex justify-between">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-yellow-400"
+                                                    fill="#FF934F" viewBox="0 0 448 512" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
+                                                    </svg>
+                                                <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --></svg>
+                                                <div
+                                                    class="bg-red-500 rounded-full h-6 px-2 flex justify-items-center text-white font-semibold text-sm">
+                                                    <span class="flex items-center">30%</span>
+                                                </div>
+                                            </div>
+                                                <div>
+                                                    <div class="mt-3 text-[5rem] text-center font-bold leading-8 p-8"><?php echo $num_admin ?></div>
+
+                                                    <div class="mt-1 text-base text-gray-600">Total Admins</div>
+                                                </div>
+                                            </div>
+                </div>
                                 </div>
                             </div>
                           
                         </div>
                     </div>
-                    <div class="w-[50%] dark:bg-gray-800 rounded-lg">
-                    <div class="m-8" id="barContainer" style="height: 370px; width: 90%; border-radius:10px;"></div>
-                    </div>
-                    <div>
-  <canvas id="myChart"></canvas>
-</div>
+                    
+
                     </div>
                     
                 </div>
             </main>
             <?php  ?>     
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-  const data = {
-    labels: ['Visitors'],
-    datasets: [{
-      label: 'Visitor Count',
-      data: [],
-      backgroundColor: [
-        'rgb(255, 99, 132)',
-      ],
-      hoverOffset: 4
-    }]
-  };
-
-  const config = {
-    type: 'doughnut',
-    data: data,
-  };
-
-  var myChart = new Chart(
-    document.getElementById('myChart'),
-    config
-  );
-</script>
 
 
 
-
+           
             <script src="https://cdn.tailwindcss.com"></script>
             <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+            
            
 </body>
 </html>

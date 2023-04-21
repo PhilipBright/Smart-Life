@@ -84,11 +84,11 @@ include('./cursor.php');
         
         </div>
         
-<p class=" leading-7 lg:pt-6 mb-3 font-normal text-gray-500 dark:text-gray-400">Track work across the enterprise through an open, collaborative platform. Link issues across Jira and ingest data from other software development tools, so your IT support and operations teams have richer contextual information to rapidly respond to requests, incidents, and changes.</p>
-<p class=" leading-7 font-normal text-gray-500 dark:text-gray-400">Deliver great service experiences fast - without the complexity of traditional ITSM solutions.Accelerate critical development work, eliminate toil, and deploy changes with ease, with a complete audit trail for every change.</p>
+<p class=" leading-7 lg:pt-6 mb-3 font-normal text-gray-500 dark:text-gray-400">Welcome to the Smart Life, if you're looking to upgrade your home with the latest smart technology, or simply want to stay on top of your health and fitness goals, Smart Life has everything you need to live a smarter, more connected life. Browse our collection today and discover the power of smart technology!</p>
+<p class=" leading-7 font-normal text-gray-500 dark:text-gray-400">From smart home automation systems and security cameras, to wearable technology and fitness trackers, our products are designed to simplify your day-to-day routine and enhance your overall quality of life.</p>
 
         <div>
-          <button class="lg:pt-4 border border-teal-400 bg-white dark:bg-gray-900 dark:text-white text-black  ml-4 mt-5 py-2 px-4 inline-block rounded dark:hover:bg-teal-400 hover:text-white">Get Started</button>
+          <a href="#About" class="lg:pt-2 border border-teal-400 bg-white dark:bg-gray-900 dark:text-white text-black  ml-4 mt-5 py-2 px-4 inline-block rounded dark:hover:bg-teal-400 hover:text-white">Get Started</a>
         </div>
       </div>
       <div>
@@ -101,7 +101,7 @@ include('./cursor.php');
 
     <section id="About" class="bg-white dark:bg-gray-800">
       <div class="flex justify-center">
-    <h2 class="mt-8 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">We didn't reinvent the wheel</h2>
+    <h2 class="mt-8 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Get to Know Smart Life</h2>
     </div>
     <div class="gap-16 items-center px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-8 lg:px-6">
     
@@ -113,7 +113,7 @@ include('./cursor.php');
     
 <blockquote class="text-xl italic font-semibold text-gray-900 dark:text-white">
     <svg aria-hidden="true" class="w-10 h-10 text-gray-400 dark:text-gray-600" viewBox="0 0 24 27" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" fill="currentColor"/></svg>
-    <p>"Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio nam suscipit eveniet id pariatur, unde accusamus eius, esse cupiditate ab nihil tenetur ullam similique, corporis quo beatae officia harum? Nemo"</p>
+    <p>"Smart Life is an innovative e-commerce website that offers a wide selection of cutting-edge smart devices, designed to simplify your life and enhance your overall quality of living. With a focus on providing the latest and greatest technology, Smart Life is your go-to destination for all things smart. From smart home automation to wearable tech and fitness trackers, our expertly curated collection has something for everyone. Shop with us today and experience the power of smart technology!"</p>
 </blockquote>
 
 </section>
@@ -392,7 +392,7 @@ include('./cursor.php');
  
 
   <script>
-   const text = "We invest in the world’s potential";
+   const text = "Simplify Your Life with Smart Devices";
 let index = 0;
 
 function type() {

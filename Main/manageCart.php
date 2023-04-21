@@ -50,16 +50,14 @@
 
     if(isset($_POST['plus'])) {
         // Retrieve the current quantity from the session
-        echo "<script>alert('hi')</script>";
+        
         $quantity = $_SESSION['cart'][$_POST['cid']]['Quantity'];
         $qty = $_SESSION['cart'][$_POST['cid']]['Qty'];
         // Increase the quantity by 1
         if($quantity < $qty) {
             $quantity++;  
           }
-          
-        
-
+  
         $_SESSION['cart'][$_POST['cid']]['Quantity'] = $quantity;
       
         // Update the quantity in the session
@@ -68,7 +66,7 @@
       }
       if(isset($_POST['minus'])) {
         // Retrieve the current quantity from the session
-        echo "<script>alert('hi')</script>";
+       
         $quantity = $_SESSION['cart'][$_POST['cid']]['Quantity'];
       
         // Increase the quantity by 1

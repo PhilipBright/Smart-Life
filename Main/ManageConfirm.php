@@ -24,14 +24,15 @@
         $id = $item['id'];
         $itemname = $item['name'];
         $itemquantity = $item['Quantity'];
+        $item_cat = $item['category'];
         $eprice = $item['price']*$item['Quantity'];
 
         $sql = "INSERT INTO tbl_order(customer_name, customer_address, customer_phone, customer_email, postal_code, 
-        order_product, order_quantity, order_price, order_total, order_date, discount, PaymentType, cus_for) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        order_product, order_quantity, order_price, order_total, order_date, discount, PaymentType, cus_for, cat_for) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         $sq = $db->prepare($sql);
 
         try {
-            $sq->execute(array($username, $address, $phone, $email, $postalcode, $itemname, $itemquantity, $eprice, $totalAmount, $current_date, $discount, $payment, $cus_for));
+            $sq->execute(array($username, $address, $phone, $email, $postalcode, $itemname, $itemquantity, $eprice, $totalAmount, $current_date, $discount, $payment, $cus_for, $item_cat));
             
             // Get the current quantity of the product
         $query = "SELECT product_qty FROM tbl_products WHERE product_id = $id";

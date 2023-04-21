@@ -75,15 +75,12 @@ include('../Components/AdminNavigation.php');
                 if (isset($_FILES['image'])) {
                     
                     $error = array();
-            
                     $filename = $_FILES['image']['name']; //logo.jpg
                     $filsize  = $_FILES['image']['size']; //2345678 bytes
                     $filetype = $_FILES['image']['type']; //logo/jpg
                     $filetmp  = $_FILES['image']['tmp_name']; //astadf
-            
                     $file_ex = explode("/", $filetype);
                     $filex = strtolower(end($file_ex));
-            
                     $extension = array("jpg", "png", "jpeg", "gif", "jif", "webp", "jfif");
             
                     if (in_array($filex, $extension) == FALSE) {
@@ -98,12 +95,7 @@ include('../Components/AdminNavigation.php');
                $title = $_POST['title'];
                $description = $_POST['description'];
               $image = $filename;
-             
-                
-                // $active = $_POST['active'];
-        
-        
-                
+
                 $sq->execute(array($title, $description, $image));
               
             }

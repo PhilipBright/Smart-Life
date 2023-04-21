@@ -44,7 +44,7 @@ include('../Components/connect.php');
     
            $sq->execute(array($title, $description, $price, $image, $rating, $category, $qty, $qty));
            
-           
+           header('Location: products.php');
            }
            
            

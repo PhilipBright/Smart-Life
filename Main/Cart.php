@@ -26,7 +26,7 @@
 
 if(isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
   foreach($_SESSION['cart'] as $product) {
-    $total_price += $product['price']*$product['Quantity']; // add the price of each selected product to the total price
+    $total_price += $product['price']*$product['Quantity']; 
   }
 }  echo "$".$total_price ?>
 <input type="hidden" name="totalPrice" value="<?php echo $total_price ?>">
