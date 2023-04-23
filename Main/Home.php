@@ -3,8 +3,6 @@
 include('./Navigation.php');
 include('./cursor.php');
 
-
-
 ?>
 
 <!DOCTYPE html>

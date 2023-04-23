@@ -9,9 +9,7 @@
     
         header('Location: products.php');
     }
-    
  ?>
-
 
  <?php
  if(isset($_GET['uid'])){
@@ -20,7 +18,6 @@
   $sql->execute();
 
   header('Location: manageUsers.php');} ?>
-
 
   <?php
     if(isset($_GET['Pupdate'])){
